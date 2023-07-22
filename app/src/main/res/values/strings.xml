@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ToDoNow</string>
+    <string name="titulo_da_tarefa">Titulo da Tarefa</string>
+    <string name="digite_o_titulo_da_sua_tarefa">Digite o titulo da sua tarefa</string>
+    <string name="descricao_da_tarefa">Descrição da Tarefa</string>
+    <string name="descreva_a_sua_tarefa">Descreva a sua tarefa</string>
+    <string name="nivel_de_prioridade">Nivel de Prioridade</string>
+    <string name="baixa">Baixa</string>
+    <string name="m_dia">Média</string>
+    <string name="alta">Alta</string>
+    <string name="text_salvar">Salvar</string>
+    <string name="botao_salvar">Botão salvar</string>
+    <string name="adicionar_nova_tarefa">Adicionar nova tarefa</string>
+    <string name="adicione_uma_tarefa">Adicione uma tarefa!</string>
+    <string name="descricao">Descrição</string>
+    <string name="titulo">Titulo</string>
+</resources>

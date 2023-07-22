@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        tools:context=".NovasTarefas">
+
+        <TextView
+            android:id="@+id/text_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:text="@string/titulo_da_tarefa"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@id/edit_Titulo"
+            app:layout_constraintStart_toStartOf="@id/edit_Titulo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_Titulo"
+            style="@style/Campo_titulo"
+            android:layout_width="380dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="77dp"
+            android:hint="@string/digite_o_titulo_da_sua_tarefa"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="173dp"
+            android:text="@string/descricao_da_tarefa"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@id/edit_descricao"
+            app:layout_constraintStart_toStartOf="@id/edit_descricao"/>
+
+        <EditText
+            android:id="@+id/edit_descricao"
+            style="@style/Campo_titulo"
+            android:layout_width="380dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="208dp"
+            android:hint="@string/descreva_a_sua_tarefa"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:padding="10dp"
+            android:textAlignment="textStart"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_prioridade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="425dp"
+            android:text="@string/nivel_de_prioridade"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="@id/view_prioridade"
+            app:layout_constraintBottom_toTopOf="@id/view_prioridade"/>
+
+        <View
+            android:id="@+id/view_prioridade"
+            style="@style/Campo_titulo"
+            android:layout_width="380dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="456dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="473dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="@string/baixa"
+                android:textColor="@color/green"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="@string/m_dia"
+                android:textColor="#FFC800"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alta"
+                android:textColor="@color/red"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view_salvar"
+            style="@style/Button_salvar"
+            android:layout_width="330dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="580dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSalvar"
+            android:layout_width="320dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="580dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/botao_salvar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_salvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="592dp"
+            android:text="@string/text_salvar"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
