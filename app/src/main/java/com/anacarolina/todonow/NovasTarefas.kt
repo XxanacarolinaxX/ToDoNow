@@ -10,6 +10,7 @@ import com.anacarolina.todonow.databinding.ActivityNovasTarefasBinding
 
 class NovasTarefas : AppCompatActivity() {
     private lateinit var binding: ActivityNovasTarefasBinding
+    private val CardTarefa: MutableList<CardItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +43,6 @@ class NovasTarefas : AppCompatActivity() {
 
         }
 
-        //exibir nivel de prioridade na MainActivity
-
 
         //envia informacoes entre atividades e passa os valores dos editTexts para a MainActivity
         binding.buttonSalvar.setOnClickListener {
@@ -63,12 +62,15 @@ class NovasTarefas : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             } else {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("exibirCardView", true)
                 intent.putExtra("titulo", tituloNT)
                 intent.putExtra("descricao", descricaoNT)
                 intent.putExtra("prioridade", prioridadeNT)
                 startActivity(intent)
             }
         }
+
+        //exibir nivel de prioridade na MainActivity
+
+
     }
 }
