@@ -24,11 +24,13 @@
             app:title="Lista de Tarefas"
             app:titleTextColor="@color/white" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylerView_tarefas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="16dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabButton"
@@ -39,8 +41,6 @@
             android:backgroundTint="@color/white"
             android:contentDescription="@string/adicionar_nova_tarefa"
             android:src="@drawable/ic_add"
-            app:layout_anchor="@layout/activity_novas_tarefas"
-            app:layout_anchorGravity="bottom|end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

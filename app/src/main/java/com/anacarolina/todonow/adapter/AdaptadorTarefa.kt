@@ -6,17 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anacarolina.todonow.R
+import com.anacarolina.todonow.Tarefa
 import com.anacarolina.todonow.tarefa_class
 
-class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
+class AdaptadorTarefa(private val listaTarefas: MutableList<Tarefa>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
 
     // ViewHolder que representa cada item do RecyclerView
-    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewTitle: TextView = itemView.findViewById(R.id.edit_Titulo)
-        val textViewDescription: TextView = itemView.findViewById(R.id.edit_descricao)
+    inner class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tituloTextView: TextView = view.findViewById(R.id.cardView_titulo)
+        val descricaoTextView: TextView = view.findViewById(R.id.cardView_descricao)
     }
 
-    // inflar o layout do item da lista
+    // Inflar o layout do item da lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val cardView = LayoutInflater.from(parent.context).inflate(R.layout.tarefa_item, parent, false)
         return CardViewHolder(cardView)
@@ -24,21 +25,22 @@ class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : Rec
 
     // Associa os dados de cada item à View do ViewHolder
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val item = listaTarefas[position]
-        holder.textViewTitle.text = item.titulo
-        holder.textViewDescription.text = item.descricao
+        val tarefa = listaTarefas[position]
+
+        // Define os dados da tarefa nos elementos do CardView
+        holder.tituloTextView.text = tarefa.titulo
+        holder.descricaoTextView.text = tarefa.descricao
     }
 
-    //retorna o número total de itens na lista
+    // Retorna o número total de itens na lista
     override fun getItemCount(): Int {
         return listaTarefas.size
     }
 
     // Método para adicionar uma nova tarefa à lista
-    fun add(tarefa: tarefa_class) {
+    fun add(tarefa: Tarefa) {
         listaTarefas.add(tarefa)
         notifyDataSetChanged()
     }
 }
-
 
