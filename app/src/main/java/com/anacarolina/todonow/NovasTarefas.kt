@@ -1,18 +1,15 @@
 package com.anacarolina.todonow
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.cardview.widget.CardView
 import com.anacarolina.todonow.adapter.AdaptadorTarefa
 import com.anacarolina.todonow.databinding.ActivityNovasTarefasBinding
-import com.anacarolina.todonow.cardItems
 
 class NovasTarefas : AppCompatActivity() {
     private lateinit var binding: ActivityNovasTarefasBinding
-    private val CardItems: MutableList<cardItems> = mutableListOf()
+    private val listaTarefas: MutableList<tarefa_class> = mutableListOf()
     private lateinit var adaptadorTarefa: AdaptadorTarefa
 
     private lateinit var semPrioridade: ImageView
@@ -26,10 +23,17 @@ class NovasTarefas : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // Inicializa as variáveis das prioridades
+        prioridadeBaixa = findViewById(R.id.drawable_baixa)
+        prioridadeMedia = findViewById(R.id.drawable_media)
+        prioridadeAlta = findViewById(R.id.drawable_alta)
+        semPrioridade = findViewById(R.id.drawable_semprioridade)
+
         //Esconder supportActionBar
         supportActionBar?.hide()
 
-
+        // Inicializa o adaptador de tarefas
+        adaptadorTarefa = AdaptadorTarefa(listaTarefas)
 
         //click do radioButton
         val radioGroup: RadioGroup = binding.radioGroup
@@ -40,12 +44,6 @@ class NovasTarefas : AppCompatActivity() {
                 radioButton.isChecked = radioButton.id == checkedId
             }
         }
-
-        // Inicializa as variáveis das prioridades
-        prioridadeBaixa = findViewById(R.id.drawable_baixa)
-        prioridadeMedia = findViewById(R.id.drawable_media)
-        prioridadeAlta = findViewById(R.id.drawable_alta)
-        semPrioridade = findViewById(R.id.drawable_semprioridade)
 
         //exibe a imagem do circulo de cada prioridade
         val radioButtonbBaixa: RadioButton = findViewById(R.id.radioButton1)
@@ -69,7 +67,6 @@ class NovasTarefas : AppCompatActivity() {
             prioridadeAlta.visibility = ImageView.VISIBLE
         }
 
-
         //apenas um permanecer clicado
         for (i in 0 until radioGroup.childCount) {
             val radioButton: RadioButton = radioGroup.getChildAt(i) as RadioButton
@@ -79,11 +76,9 @@ class NovasTarefas : AppCompatActivity() {
                     outroRadioButton.isChecked = outroRadioButton == radioButton
                 }
             }
-
         }
 
-
-        //envia informacoes entre atividades e passa os valores dos editTexts para a MainActivity
+        //envia informações entre atividades e passa os valores dos editTexts para a MainActivity
         binding.buttonSalvar.setOnClickListener {
             val tituloNT = binding.editTitulo.text.toString()
             val descricaoNT = binding.editDescricao.text.toString()
@@ -91,9 +86,7 @@ class NovasTarefas : AppCompatActivity() {
                 R.id.radioButton1 -> "Baixa"
                 R.id.radioButton2 -> "Média"
                 R.id.radioButton3 -> "Alta"
-                else -> {
-                    ""
-                }
+                else -> ""
             }
 
             if (prioridadeNT.isEmpty()) {
@@ -101,13 +94,19 @@ class NovasTarefas : AppCompatActivity() {
                 prioridadeBaixa.visibility = View.INVISIBLE
                 prioridadeMedia.visibility = View.INVISIBLE
                 prioridadeAlta.visibility = View.INVISIBLE
+            } else {
+                //passa as informações para a MainActivity
+                val novatarefa = tarefa_class(tituloNT, descricaoNT, prioridadeNT)
+                listaTarefas.add(novatarefa) // Adiciona a tarefa à lista antes de passá-la para o adaptador
+                adaptadorTarefa.notifyDataSetChanged() // Notifica o adaptador sobre a mudança nos dados
             }
-
-            //passa as informções para a MainActivity
-            val novatarefa = tarefa_class(tituloNT, descricaoNT, prioridadeNT)
-            adaptadorTarefa.add(novatarefa)
-
         }
+    }
 
+    // Função para preencher a lista de tarefas (pode ser chamada em outros lugares conforme sua lógica)
+    private fun preencherListaTarefas() {
+        listaTarefas.add(tarefa_class("Exemplo 1", "Descrição de exemplo 1", "Baixa"))
+        listaTarefas.add(tarefa_class("Exemplo 2", "Descrição de exemplo 2", "Média"))
+        listaTarefas.add(tarefa_class("Exemplo 3", "Descrição de exemplo 3", "Alta"))
     }
 }

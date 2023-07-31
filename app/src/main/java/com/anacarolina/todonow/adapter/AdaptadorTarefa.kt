@@ -4,13 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.anacarolina.todonow.R
-import com.anacarolina.todonow.cardItems
-import com.anacarolina.todonow.listaTarefas
 import com.anacarolina.todonow.tarefa_class
-
 
 class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
 
@@ -26,7 +22,6 @@ class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : Rec
         return CardViewHolder(cardView)
     }
 
-
     // Associa os dados de cada item à View do ViewHolder
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val item = listaTarefas[position]
@@ -34,7 +29,7 @@ class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : Rec
         holder.textViewDescription.text = item.descricao
     }
 
-    //retorna o número total de ites na lista
+    //retorna o número total de itens na lista
     override fun getItemCount(): Int {
         return listaTarefas.size
     }
