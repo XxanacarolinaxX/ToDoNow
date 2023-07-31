@@ -7,9 +7,12 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.anacarolina.todonow.R
+import com.anacarolina.todonow.cardItems
+import com.anacarolina.todonow.listaTarefas
 import com.anacarolina.todonow.tarefa_class
 
-class AdaptadorTarefa(private val cardItems: List<tarefa_class>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
+
+class AdaptadorTarefa(private val listaTarefas: MutableList<tarefa_class>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
 
     // ViewHolder que representa cada item do RecyclerView
     class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,16 +26,23 @@ class AdaptadorTarefa(private val cardItems: List<tarefa_class>) : RecyclerView.
         return CardViewHolder(cardView)
     }
 
+
     // Associa os dados de cada item à View do ViewHolder
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val item = cardItems[position]
-        holder.textViewTitle.text = item.toString()
-        holder.textViewDescription.text = item.toString()
+        val item = listaTarefas[position]
+        holder.textViewTitle.text = item.titulo
+        holder.textViewDescription.text = item.descricao
     }
 
     //retorna o número total de ites na lista
     override fun getItemCount(): Int {
-        return cardItems.size
+        return listaTarefas.size
+    }
+
+    // Método para adicionar uma nova tarefa à lista
+    fun add(tarefa: tarefa_class) {
+        listaTarefas.add(tarefa)
+        notifyDataSetChanged()
     }
 }
 

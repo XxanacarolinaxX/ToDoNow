@@ -11,6 +11,45 @@
         android:layout_gravity="center_horizontal"
         android:visibility="visible">
 
+        <ImageView
+            android:id="@+id/drawable_semprioridade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_circle_semprioridade"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:contentDescription="@string/sem_prioridade" />
+
+        <ImageView
+            android:id="@+id/drawable_baixa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_circle_baixa"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="invisible"
+            android:contentDescription="@string/baixa_prioridade"/>
+
+        <ImageView
+            android:id="@+id/drawable_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_circle_media"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="invisible"
+            android:contentDescription="@string/media_prioridade"/>
+
+        <ImageView
+            android:id="@+id/drawable_alta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_circle_alta"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="invisible"
+            android:contentDescription="@string/alta_prioridade" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,27 +60,28 @@
                 android:id="@+id/cardView_titulo"
                 android:layout_width="360dp"
                 android:layout_height="48dp"
-                android:text="@string/titulo"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:hint="Titulo"/>
 
             <EditText
                 android:id="@+id/cardView_descricao"
                 android:layout_width="360dp"
                 android:layout_height="110dp"
-                android:text="@string/descricao"
+                android:hint="Descrição"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/cardView_prioridade"
-                android:layout_width="360dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Prioridade: "
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
 
         </LinearLayout>
 

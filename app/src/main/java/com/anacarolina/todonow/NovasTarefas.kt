@@ -6,11 +6,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.cardview.widget.CardView
+import com.anacarolina.todonow.adapter.AdaptadorTarefa
 import com.anacarolina.todonow.databinding.ActivityNovasTarefasBinding
+import com.anacarolina.todonow.cardItems
 
 class NovasTarefas : AppCompatActivity() {
     private lateinit var binding: ActivityNovasTarefasBinding
-    private val CardTarefa: MutableList<CardItem> = mutableListOf()
+    private val CardItems: MutableList<cardItems> = mutableListOf()
+    private lateinit var adaptadorTarefa: AdaptadorTarefa
+
+    private lateinit var semPrioridade: ImageView
+    private lateinit var prioridadeBaixa: ImageView
+    private lateinit var prioridadeMedia: ImageView
+    private lateinit var prioridadeAlta: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +29,8 @@ class NovasTarefas : AppCompatActivity() {
         //Esconder supportActionBar
         supportActionBar?.hide()
 
+
+
         //click do radioButton
         val radioGroup: RadioGroup = binding.radioGroup
 
@@ -30,6 +40,35 @@ class NovasTarefas : AppCompatActivity() {
                 radioButton.isChecked = radioButton.id == checkedId
             }
         }
+
+        // Inicializa as variáveis das prioridades
+        prioridadeBaixa = findViewById(R.id.drawable_baixa)
+        prioridadeMedia = findViewById(R.id.drawable_media)
+        prioridadeAlta = findViewById(R.id.drawable_alta)
+        semPrioridade = findViewById(R.id.drawable_semprioridade)
+
+        //exibe a imagem do circulo de cada prioridade
+        val radioButtonbBaixa: RadioButton = findViewById(R.id.radioButton1)
+        val radioButtonbMedia: RadioButton = findViewById(R.id.radioButton2)
+        val radioButtonbAlta: RadioButton = findViewById(R.id.radioButton3)
+
+        radioButtonbBaixa.setOnClickListener {
+            prioridadeBaixa.visibility = ImageView.VISIBLE
+            prioridadeMedia.visibility = ImageView.INVISIBLE
+            prioridadeAlta.visibility = ImageView.INVISIBLE
+        }
+
+        radioButtonbMedia.setOnClickListener {
+            prioridadeBaixa.visibility = ImageView.INVISIBLE
+            prioridadeMedia.visibility = ImageView.VISIBLE
+            prioridadeAlta.visibility = ImageView.INVISIBLE
+        }
+        radioButtonbAlta.setOnClickListener {
+            prioridadeBaixa.visibility = ImageView.INVISIBLE
+            prioridadeMedia.visibility = ImageView.INVISIBLE
+            prioridadeAlta.visibility = ImageView.VISIBLE
+        }
+
 
         //apenas um permanecer clicado
         for (i in 0 until radioGroup.childCount) {
@@ -58,19 +97,17 @@ class NovasTarefas : AppCompatActivity() {
             }
 
             if (prioridadeNT.isEmpty()) {
-                Toast.makeText(this, "Adicione uma prioridade para a sua tarefa",
-                    Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("titulo", tituloNT)
-                intent.putExtra("descricao", descricaoNT)
-                intent.putExtra("prioridade", prioridadeNT)
-                startActivity(intent)
+                semPrioridade.visibility = View.VISIBLE
+                prioridadeBaixa.visibility = View.INVISIBLE
+                prioridadeMedia.visibility = View.INVISIBLE
+                prioridadeAlta.visibility = View.INVISIBLE
             }
+
+            //passa as informções para a MainActivity
+            val novatarefa = tarefa_class(tituloNT, descricaoNT, prioridadeNT)
+            adaptadorTarefa.add(novatarefa)
+
         }
-
-        //exibir nivel de prioridade na MainActivity
-
 
     }
 }

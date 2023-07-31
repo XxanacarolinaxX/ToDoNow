@@ -14,4 +14,8 @@
     <string name="adicione_uma_tarefa">Adicione uma tarefa!</string>
     <string name="descricao">Descrição</string>
     <string name="titulo">Titulo</string>
+    <string name="alta_prioridade">Alta Prioridade</string>
+    <string name="media_prioridade">Media Prioridade</string>
+    <string name="baixa_prioridade">Baixa Prioridade</string>
+    <string name="sem_prioridade">sem prioridade</string>
 </resources>
