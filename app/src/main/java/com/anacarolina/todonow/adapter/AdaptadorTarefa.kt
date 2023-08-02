@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anacarolina.todonow.R
 import com.anacarolina.todonow.Tarefa
-import com.anacarolina.todonow.tarefa_class
 
 class AdaptadorTarefa(private val listaTarefas: MutableList<Tarefa>) : RecyclerView.Adapter<AdaptadorTarefa.CardViewHolder>() {
 
@@ -19,7 +18,7 @@ class AdaptadorTarefa(private val listaTarefas: MutableList<Tarefa>) : RecyclerV
 
     // Inflar o layout do item da lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val cardView = LayoutInflater.from(parent.context).inflate(R.layout.tarefa_item, parent, false)
+        val cardView = LayoutInflater.from(parent.context).inflate(R.layout.card_sem_prioridade, parent, false)
         return CardViewHolder(cardView)
     }
 

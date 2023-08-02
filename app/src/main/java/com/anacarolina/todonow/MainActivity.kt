@@ -4,19 +4,70 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anacarolina.todonow.adapter.AdaptadorTarefa
 import com.anacarolina.todonow.databinding.ActivityMainBinding
+import com.anacarolina.todonow.databinding.CardAltaPrioridadeBinding
+import com.anacarolina.todonow.databinding.CardBaixaPrioridadeBinding
+import com.anacarolina.todonow.databinding.CardMediaPrioridadeBinding
+import com.anacarolina.todonow.databinding.CardSemPrioridadeBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class MainActivity : AppCompatActivity() {
 
-    private val CODIGO_NOVA_TAREFA = 1
     private lateinit var binding: ActivityMainBinding
     private lateinit var adaptadorTarefa: AdaptadorTarefa
     private lateinit var listaTarefas: MutableList<Tarefa>
+
+    private lateinit var cardBaixa: CardBaixaPrioridadeBinding
+    private lateinit var cardMedia: CardMediaPrioridadeBinding
+    private lateinit var cardAlta: CardAltaPrioridadeBinding
+    private lateinit var cardSemPrioridade: CardSemPrioridadeBinding
+
+    private val meuActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            if (data != null) {
+                val novaTarefa = data.getParcelableExtra<Tarefa>("novaTarefa") as Tarefa
+
+                if (novaTarefa != null) {
+                    listaTarefas.add(novaTarefa)
+                    adaptadorTarefa.notifyDataSetChanged()
+                }
+
+                // Verifica a prioridade da tarefa e exibe no CardView apropriado
+                when (novaTarefa.prioridade) {
+                    "Baixa" -> {
+                        cardBaixa.root.visibility = View.VISIBLE
+                        cardMedia.root.visibility = View.GONE
+                        cardAlta.root.visibility = View.GONE
+                        cardSemPrioridade.root.visibility = View.GONE
+                    }
+                    "Media" -> {
+                        cardBaixa.root.visibility = View.GONE
+                        cardMedia.root.visibility = View.VISIBLE
+                        cardAlta.root.visibility = View.GONE
+                        cardSemPrioridade.root.visibility = View.GONE
+                    }
+                    "Alta" -> {
+                        cardBaixa.root.visibility = View.GONE
+                        cardMedia.root.visibility = View.GONE
+                        cardAlta.root.visibility = View.VISIBLE
+                        cardSemPrioridade.root.visibility = View.GONE
+                    }
+                    else -> {
+                        cardBaixa.root.visibility = View.GONE
+                        cardMedia.root.visibility = View.GONE
+                        cardAlta.root.visibility = View.GONE
+                        cardSemPrioridade.root.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,48 +80,21 @@ class MainActivity : AppCompatActivity() {
         // Navegação da MainActivity para NovasTarefas com fabButton
         val fab: FloatingActionButton = findViewById(R.id.fabButton)
         fab.setOnClickListener {
-            val intent = Intent(this, NovasTarefas::class.java)
-            startActivityForResult(intent, CODIGO_NOVA_TAREFA)
+            meuActivityResultLauncher.launch(Intent(this, NovasTarefas::class.java))
         }
+
+        cardBaixa = CardBaixaPrioridadeBinding.inflate(layoutInflater)
+        cardMedia = CardMediaPrioridadeBinding.inflate(layoutInflater)
+        cardAlta = CardAltaPrioridadeBinding.inflate(layoutInflater)
+        cardSemPrioridade = CardSemPrioridadeBinding.inflate(layoutInflater)
 
         // Lista de tarefas
-        listaTarefas = mutableListOf<Tarefa>()
-
-        // Recupera os dados passados
-        val titulo = intent.getStringExtra("titulo")
-        val descricao = intent.getStringExtra("descricao")
-        val prioridade = intent.getStringExtra("prioridade") ?: ""
-
-        // Cria um novo objeto Tarefa com as informações recebidas e adiciona à lista de tarefas
-        if (!titulo.isNullOrEmpty() && !descricao.isNullOrEmpty()) {
-            val novatarefa = Tarefa(titulo, descricao, prioridade)
-            listaTarefas.add(novatarefa)
-        }
-
-        // Inicializa o adaptador
-        adaptadorTarefa = AdaptadorTarefa(listaTarefas)
+        listaTarefas = mutableListOf()
 
         // RecyclerView para exibir cardViews
         val recyclerView: RecyclerView = findViewById(R.id.recylerView_tarefas)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adaptadorTarefa = AdaptadorTarefa(listaTarefas)
         recyclerView.adapter = adaptadorTarefa
-
-    }
-
-    // Exibir informações no cardView
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == CODIGO_NOVA_TAREFA && resultCode == Activity.RESULT_OK) {
-            // Recebe a tarefa enviada pela NovasTarefas.kt
-            val novaTarefa = data?.getParcelableExtra<Tarefa>("novaTarefa")
-
-            // Verifica se a tarefa não é nula e a adiciona à lista de tarefas
-            if (novaTarefa != null) {
-                listaTarefas.add(novaTarefa)
-                adaptadorTarefa.notifyDataSetChanged()
-            }
-        }
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="220dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="380dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/drawable_semprioridade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_semprioridade"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:contentDescription="@string/sem_prioridade" />
+
+        <ImageView
+            android:id="@+id/drawable_baixa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_baixa"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="gone"
+            android:contentDescription="@string/baixa_prioridade"/>
+
+        <ImageView
+            android:id="@+id/drawable_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_media"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="gone"
+            android:contentDescription="@string/media_prioridade"/>
+
+        <ImageView
+            android:id="@+id/drawable_alta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drawable_alta"
+            android:layout_marginTop="175dp"
+            android:layout_marginStart="120dp"
+            android:visibility="gone"
+            android:contentDescription="@string/alta_prioridade" />
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="220dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/cardView_titulo"
+                android:layout_width="360dp"
+                android:layout_height="48dp"
+                android:hint="Titulo"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/cardView_descricao"
+                android:layout_width="360dp"
+                android:layout_height="110dp"
+                android:hint="Descrição"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cardView_prioridade"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Prioridade: "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
