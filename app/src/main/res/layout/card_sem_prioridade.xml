@@ -23,34 +23,12 @@
             android:contentDescription="@string/sem_prioridade" />
 
         <ImageView
-            android:id="@+id/drawable_baixa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/drawable_baixa"
-            android:layout_marginTop="175dp"
-            android:layout_marginStart="120dp"
-            android:visibility="gone"
-            android:contentDescription="@string/baixa_prioridade"/>
-
-        <ImageView
-            android:id="@+id/drawable_media"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/drawable_media"
-            android:layout_marginTop="175dp"
-            android:layout_marginStart="120dp"
-            android:visibility="gone"
-            android:contentDescription="@string/media_prioridade"/>
-
-        <ImageView
-            android:id="@+id/drawable_alta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/drawable_alta"
-            android:layout_marginTop="175dp"
-            android:layout_marginStart="120dp"
-            android:visibility="gone"
-            android:contentDescription="@string/alta_prioridade" />
+            android:id="@+id/delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_delete"
+            android:layout_marginTop="160dp"
+            android:layout_marginStart="330dp" />
 
         <LinearLayout
             android:layout_width="380dp"
@@ -58,7 +36,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/cardView_titulo"
                 android:layout_width="360dp"
                 android:layout_height="48dp"
@@ -67,7 +45,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/cardView_descricao"
                 android:layout_width="360dp"
                 android:layout_height="110dp"

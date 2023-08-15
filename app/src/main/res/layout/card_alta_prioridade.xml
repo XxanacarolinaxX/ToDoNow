@@ -7,7 +7,7 @@
     android:layout_marginTop="15dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardViewAlta"
         android:layout_width="380dp"
         android:layout_height="220dp"
         android:layout_gravity="center_horizontal"
@@ -21,6 +21,14 @@
             android:layout_marginTop="175dp"
             android:layout_marginStart="120dp"
             android:contentDescription="@string/alta_prioridade" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_delete"
+            android:layout_marginTop="160dp"
+            android:layout_marginStart="330dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +45,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/cardView_titulo"
                 android:layout_width="360dp"
                 android:layout_height="48dp"
@@ -46,7 +54,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/cardView_descricao"
                 android:layout_width="360dp"
                 android:layout_height="110dp"

@@ -4,63 +4,52 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.*
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.anacarolina.todonow.adapter.AdaptadorTarefa
-import com.anacarolina.todonow.databinding.*
+import com.anacarolina.todonow.databinding.ActivityNovasTarefasBinding
 
 class NovasTarefas : AppCompatActivity() {
-    private lateinit var binding: ActivityNovasTarefasBinding
 
+    private lateinit var binding: ActivityNovasTarefasBinding
     private val listaTarefas: MutableList<Tarefa> = mutableListOf()
     private lateinit var adaptadorTarefa: AdaptadorTarefa
-
-    private lateinit var semPrioridade: ImageView
-    private lateinit var prioridadeBaixa: ImageView
-    private lateinit var prioridadeMedia: ImageView
-    private lateinit var prioridadeAlta: ImageView
-
-    private lateinit var altaPrioridadeBinding: CardAltaPrioridadeBinding
-    private lateinit var mediaPrioridadeBinding: CardMediaPrioridadeBinding
-    private lateinit var baixaPrioridadeBinding: CardBaixaPrioridadeBinding
-    private lateinit var semPrioridadeBinding: CardSemPrioridadeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNovasTarefasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Esconder supportActionBar
+        // Esconde a supportActionBar
         supportActionBar?.hide()
 
-        // Inicializa o adaptador de tarefas
-        adaptadorTarefa = AdaptadorTarefa(listaTarefas)
+        // Configuração do RadioGroup para os radioButtons
+        RadioGroup()
 
-        // Inflar os layouts das tarefas
-        altaPrioridadeBinding= CardAltaPrioridadeBinding.inflate(layoutInflater)
-        mediaPrioridadeBinding = CardMediaPrioridadeBinding.inflate(layoutInflater)
-        baixaPrioridadeBinding = CardBaixaPrioridadeBinding.inflate(layoutInflater)
-        semPrioridadeBinding = CardSemPrioridadeBinding.inflate(layoutInflater)
+        // Configuração do botão "Salvar"
+        SalvarButton()
+    }
 
-        //Click do radioButton
+    private fun RadioGroup() {
         val radioGroup: RadioGroup = binding.radioGroup
 
+        // Listener para controlar qual radioButton está selecionado
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             for (i in 0 until group.childCount) {
                 val radioButton: RadioButton = group.getChildAt(i) as RadioButton
                 radioButton.isChecked = radioButton.id == checkedId
             }
         }
+    }
 
-        val radioButtonbBaixa: RadioButton = findViewById(R.id.radioButton1)
-        val radioButtonbMedia: RadioButton = findViewById(R.id.radioButton2)
-        val radioButtonbAlta: RadioButton = findViewById(R.id.radioButton3)
+    private fun SalvarButton() {
 
-        //Envia informações entre atividades e passa os valores dos editTexts para a MainActivity
+        // Evento de Click do botõ "Salvar"
         binding.buttonSalvar.setOnClickListener {
             val tituloNT = binding.editTitulo.text.toString()
             val descricaoNT = binding.editDescricao.text.toString()
+
+            // Determina a prioridade com base no radioButton selecionado
             val prioridadeNT = when (binding.radioGroup.checkedRadioButtonId) {
                 R.id.radioButton1 -> "Baixa"
                 R.id.radioButton2 -> "Media"
@@ -72,9 +61,9 @@ class NovasTarefas : AppCompatActivity() {
             val returnIntent = Intent()
             val novaTarefa = Tarefa(tituloNT, descricaoNT, prioridadeNT)
             returnIntent.putExtra("novaTarefa", novaTarefa)
+            returnIntent.putExtra("prioridade", prioridadeNT)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
-
         }
     }
 }
